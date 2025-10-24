@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Production & Export Dashboard</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="logo"><div class="dot"></div><h1>Dashboard</h1></div>
+      <div class="nav">
+        <a href="#" class="active">📊 Overview</a>
+        <a href="#">INV-CHECKER</a>
+        <a href="#">LOJEL DAILY PRODUKSI</a>
+        <a href="#">Search Invoice: TUMI</a>
+        <a href="#">Search Invoice: LOJEL</a>
+        <a href="#">Search Invoice: TIMBUK2</a>
+        <a href="#">Search SO: TUMI</a>
+        <a href="#">Search SO: LOJEL</a>
+      </div>
+
+      <div class="section-title">PROJECTS</div>
+      <div class="nav">
+        <a href="#">Option</a>
+        <a href="#">Case</a>
+        <a href="#">Local</a>
+      </div>
+    </aside>
+
+    <main class="main">
+      <div class="topbar">
+        <div class="search">
+          <input id="globalSearch" placeholder="Search... (Invoice / SO / Brand)"/>
+          <button class="refresh-btn" onclick="refreshAll()">🔄 Refresh</button>
+        </div>
+        <div class="top-controls">
+          <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
+          <div class="avatar">S</div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card kpi" id="kpi1">
+          <div class="label">Total Produksi Hari Ini</div>
+          <div class="value" id="kpiProd">--</div>
+          <div class="label small">Updated just now</div>
+        </div>
+        <div class="card kpi" id="kpi2">
+          <div class="label">Total Ekspor Bulan Ini</div>
+          <div class="value" id="kpiExp">--</div>
+        </div>
+        <div class="card kpi" id="kpi3">
+          <div class="label">Total Rework Rate</div>
+          <div class="value" id="kpiRework">--</div>
+        </div>
+        <div class="card kpi" id="kpi4">
+          <div class="label">Brand Teraktif</div>
+          <div class="value" id="kpiBrand">--</div>
+        </div>
+
+        <div class="card chart-large">
+          <div class="chart-head">
+            <div style="font-weight:700">Grafik Produksi</div>
+            <div class="filters">
+              <select id="timeRange" onchange="applyFilters()">
+                <option value="1D">1D</option>
+                <option value="1W">1W</option>
+                <option value="1M" selected>1M</option>
+                <option value="1Y">1Y</option>
+              </select>
+              <select id="brandSelect" multiple style="min-width:140px;height:36px"></select>
+              <button class="btn primary" onclick="applyFilters()">Apply</button>
+            </div>
+          </div>
+          <canvas id="prodChart" height="120"></canvas>
+        </div>
+
+        <div class="card chart-side">
+          <div style="font-weight:700;margin-bottom:10px">Produksi per Shift</div>
+          <canvas id="shiftChart" height="220"></canvas>
+        </div>
+
+        <div class="card chart-side">
+          <div style="font-weight:700;margin-bottom:10px">Grafik Ekspor (per Brand)</div>
+          <canvas id="expChart" height="220"></canvas>
+        </div>
+
+        <div class="card chart-side">
+          <div style="font-weight:700;margin-bottom:8px">Aktivitas</div>
+          <div class="muted">Quick notes and activity feed placeholder.</div>
+        </div>
+
+        <div class="card chart-side">
+          <div style="font-weight:700;margin-bottom:8px">Calendar</div>
+          <div class="muted">[ Calendar widget placeholder ]</div>
+        </div>
+
+        <div class="card table-wrap">
+          <div class="table-head">
+            <div style="font-weight:700">Tabel Rekap Produksi Harian</div>
+            <div class="muted">Showing latest rows</div>
+          </div>
+          <div style="overflow:auto;max-height:360px">
+            <table id="dataTable">
+              <thead><tr id="tableHeader"><th>Date</th><th>Brand</th><th>Shift</th><th>Line</th><th>Qty</th><th>Rework</th><th>Rework Fixed</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
