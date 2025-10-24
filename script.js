@@ -10,8 +10,9 @@ const SPREADSHEET_ID = "1XoV7020NTZk1kzqn3F2ks3gOVFJ5arr5NVgUdewWPNQ";
 
 // Sheet GIDs (fill the xxxxx with real values when ready)
 const GID_IN = "1100244896";
-const GID_EXPSCHED = "xxxxxxxx"; // isi nanti
-const GID_ERP = "xxxxxxxx";      // isi nanti
+const GID_EXPSCHED = "359974075"; // isi nanti, aku tunjukkan caranya di bawah
+const GID_ERP = "1158274905";
+const SHEET_GVIZ_URL = `https://docs.google.com/spreadsheets/d/${SPREADSHEET_ID}/gviz/tq?tqx=out:json&gid=${GID}`;
 
 // Palette & globals
 const palette = ['#7c3aed','#00ffe1','#10b981','#ff7ab6','#f59e0b','#60a5fa'];
